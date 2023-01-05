@@ -5,15 +5,28 @@ class MessyAlgo {
     private val descriptions: DescriptionRepository = DescriptionRepository()
 
     fun describe(article: Article): String {
-        val namesCache = names.allNames().associate { it.id to it.name }
-        val descriptionsCache = descriptions.allDescriptions().associate { it.id to it.description }
-        val authors = article.authorIds
-            .map { id -> "${namesCache[id] ?: id}${descriptionsCache[id]?.let { " (${it})" } ?: ""}" }
-            .joinToString { it }
-        val tags = article.tagIds
-            .map { id -> "${namesCache[id] ?: id}${descriptionsCache[id]?.let { " (${it})" } ?: ""}" }
-            .joinToString { it }
+        val describer = Describer(names, descriptions)
+        val authors = describer.describeFromIds(article.authorIds)
+        val tags = describer.describeFromIds(article.tagIds)
         return "${article.title} is written by $authors. It talks about $tags"
+    }
+}
+
+class Describer(names: NameRepository, descriptions: DescriptionRepository) {
+    private val namesCache: Map<String, String>
+    private val descriptionsCache: Map<String, String>
+
+    init {
+        this.namesCache = names.allNames().associate { it.id to it.name }
+        this.descriptionsCache = descriptions.allDescriptions().associate { it.id to it.description }
+    }
+
+    fun describeFromIds(
+        ids: Set<String>
+    ): String {
+        return ids
+            .map { id -> "${namesCache[id] ?: id}${descriptionsCache[id]?.let { " (${it})" } ?: ""}" }
+            .joinToString { it }
     }
 }
 
