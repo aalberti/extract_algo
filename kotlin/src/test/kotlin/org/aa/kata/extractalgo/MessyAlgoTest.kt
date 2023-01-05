@@ -11,9 +11,13 @@ internal class MessyAlgoTest {
                 Article(
                     "chit chat",
                     setOf("ddd", "TDD"),
-                    setOf("cyriux", "Jessica Kerr", "aalberti")
+                    setOf("cyriux", "Jessica Kerr", "aalberti"),
+                    setOf("nerds", "managers")
                 )
             )
-        ).isEqualTo("chit chat is written by Cyrille Martraire (DDD superstar), Jessica Kerr, Antoine Alberti (socio-poetico anarchitect). It talks about DDD (Domain-Driven Design), TDD")
+        ).isEqualTo("""chit chat is written by Cyrille Martraire (DDD superstar), Jessica Kerr, Antoine Alberti (socio-poetico anarchitect).
+            |It talks about DDD (Domain-Driven Design), TDD
+            |It targets developers (keyboard unicorns), managers"""
+            .trimMargin())
     }
 }

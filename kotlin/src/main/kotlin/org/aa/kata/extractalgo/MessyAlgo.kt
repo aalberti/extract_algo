@@ -6,9 +6,10 @@ class MessyAlgo {
 
     fun describe(article: Article): String {
         val describer = Describer(names, descriptions)
-        val authors = describer.describeFromIds(article.authorIds)
-        val tags = describer.describeFromIds(article.tagIds)
-        return "${article.title} is written by $authors. It talks about $tags"
+        return """${article.title} is written by ${describer.describeFromIds(article.authorIds)}.
+            |It talks about ${describer.describeFromIds(article.tagIds)}
+            |It targets ${describer.describeFromIds(article.targetIds)}"""
+            .trimMargin()
     }
 }
 
@@ -30,14 +31,15 @@ class Describer(names: NameRepository, descriptions: DescriptionRepository) {
     }
 }
 
-data class Article(val title: String, val tagIds: Set<String>, val authorIds: Set<String>)
+data class Article(val title: String, val tagIds: Set<String>, val authorIds: Set<String>, val targetIds: Set<String>)
 
 class NameRepository {
     fun allNames(): Set<Name> =
         setOf(
             Name("aalberti", "Antoine Alberti"),
             Name("cyriux", "Cyrille Martraire"),
-            Name("ddd", "DDD")
+            Name("ddd", "DDD"),
+            Name("nerds", "developers")
         )
 }
 
@@ -48,7 +50,8 @@ class DescriptionRepository {
         setOf(
             Description("aalberti", "socio-poetico anarchitect"),
             Description("cyriux", "DDD superstar"),
-            Description("ddd", "Domain-Driven Design")
+            Description("ddd", "Domain-Driven Design"),
+            Description("nerds", "keyboard unicorns")
         )
 }
 
