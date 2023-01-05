@@ -1,0 +1,1 @@
+A kata to extract a stateful algorithm
