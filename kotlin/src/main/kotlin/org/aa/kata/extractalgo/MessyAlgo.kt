@@ -26,9 +26,13 @@ class Describer(names: NameRepository, descriptions: DescriptionRepository) {
         ids: Set<String>
     ): String {
         return ids
-            .map { id -> "${namesCache[id] ?: id}${descriptionsCache[id]?.let { " (${it})" } ?: ""}" }
+            .map { id -> "${name(id)}${description(id)}" }
             .joinToString { it }
     }
+
+    private fun name(id: String) = namesCache[id] ?: id
+
+    private fun description(id: String) = descriptionsCache[id]?.let { " (${it})" } ?: ""
 }
 
 data class Article(val title: String, val tagIds: Set<String>, val authorIds: Set<String>, val targetIds: Set<String>)
