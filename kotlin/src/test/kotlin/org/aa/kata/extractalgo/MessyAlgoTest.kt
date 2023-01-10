@@ -10,10 +10,8 @@ internal class MessyAlgoTest {
             MessyAlgo().describe(
                 Article(
                     "chit chat",
-                    setOf("ddd", "TDD"),
-                    setOf("cyriux", "Jessica Kerr", "aalberti")
-                )
-            )
+                    listOf("ddd", "TDD"),
+                    listOf("cyriux", "Jessica Kerr", "aalberti")))
         ).isEqualTo("chit chat is written by Cyrille Martraire (DDD superstar), Jessica Kerr, Antoine Alberti (socio-poetico anarchitect). It talks about DDD (Domain-Driven Design), TDD")
     }
 }

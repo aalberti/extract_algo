@@ -17,7 +17,7 @@ class MessyAlgo {
     }
 }
 
-data class Article(val title: String, val tagIds: Set<String>, val authorIds: Set<String>)
+data class Article(val title: String, val tagIds: List<String>, val authorIds: List<String>)
 
 class NameRepository {
     fun allNames(): Set<Name> =
