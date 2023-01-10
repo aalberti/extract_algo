@@ -1,3 +1,3 @@
 
-rootProject.name = "extract-algo"
+rootProject.name = "extract-algo-kotlin"
 
